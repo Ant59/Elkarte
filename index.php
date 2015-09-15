@@ -94,9 +94,9 @@ require_once(SUBSDIR . '/Cache.subs.php');
 
 // Initialize the class Autoloader
 require(SOURCEDIR . '/Autoloader.class.php');
-$autoloder = Elk_Autoloader::getInstance();
-$autoloder->setupAutoloader(array(SOURCEDIR, SUBSDIR, CONTROLLERDIR, ADMINDIR, ADDONSDIR));
-$autoloder->register(SOURCEDIR, '\\ElkArte');
+$autoloader = Elk_Autoloader::getInstance();
+$autoloader->setupAutoloader(array(SOURCEDIR, SUBSDIR, CONTROLLERDIR, ADMINDIR, ADDONSDIR, EXTDIR));
+$autoloader->register(SOURCEDIR, '\\ElkArte');
 
 // Show lots of debug information below the page, not for production sites
 if ($db_show_debug === true)
@@ -228,7 +228,7 @@ function elk_main()
 	unset($no_stat_actions);
 
 	// What shall we do?
-	$dispatcher = new Site_Dispatcher();
+	$dispatcher = new Dispatcher();
 
 	// Show where we came from, and go
 	$context['site_action'] = $dispatcher->site_action();
