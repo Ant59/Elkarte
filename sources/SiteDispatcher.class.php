@@ -67,6 +67,19 @@ class Site_Dispatcher
 			'function' => 'action_boardindex'
 		);
 
+		// URI parsing for actions
+		$path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
+        $url = explode("/", $path, 3);
+        if (isset($url[0])) {
+            $_GET['action'] = $url[0];
+        }
+        if (isset($url[1])) {
+            $_GET['sa'] = $url[1];
+        }
+        // TODO: Something with options...
+
+        var_dump($url);
+
 		// Reminder: hooks need to account for multiple addons setting this hook.
 		call_integration_hook('integrate_action_frontpage', array(&$this->_default_action));
 
